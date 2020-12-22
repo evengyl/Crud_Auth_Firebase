@@ -1,0 +1,26 @@
+
+
+<button (click)="deleteAll()" class="btn waves-effect waves-light col s12  lime accent-3">Supprimer tous les enregistrements</button>
+<div class="row">
+    <div   *ngFor="let jeu of listJeux" class="col s12 m6">
+      <div [ngClass]="{'purple' : jeu.payload.doc.data().dispo, 'red' : !jeu.payload.doc.data().dispo}"  class="card">
+        <div class="card-image">
+          <img src="{{jeu.payload.doc.data().imageUrl}}">
+          <a (click)="deleteGame(jeu)" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">delete_forever</i></a>
+        </div>
+        <div style="height:180px;" class="card-content">
+            <span class="card-title">{{jeu.payload.doc.data().name}} : {{jeu.payload.doc.data().editor}}</span>
+            <span class="card-title"><small style="font-size: 13px;">{{jeu.payload.doc.data().dateSortie}} : {{jeu.payload.doc.data().prix}}</small></span>
+            <a routerLink="/jeuxvideoDetails/{{jeu.payload.doc.id}}" class="btn halfway-fab waves-effect waves-light green"><i class="material-icons">comment</i></a>
+            <p>
+                <span *ngFor="let categ of jeu.payload.doc.data().listCateg">
+                    {{categ}},
+                </span>
+                <a (click)="desactivateDispo(jeu)" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">clear</i></a>
+                
+          </p>
+        </div>
+      </div>
+    </div>
+</div>
+            
